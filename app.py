@@ -307,7 +307,7 @@ def handle_message(event):
 
     # ChatGPT用のスクリプト
     elif "Q" in messe:
-        return_message = messe[:messe.find('Q')]
+        return_message = messe[messe.find('Q'):]
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=open_ai.Ask_ChatGPT(return_message)))
 
 

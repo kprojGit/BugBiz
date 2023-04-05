@@ -10,7 +10,7 @@ botRoleContent = """
 
 制約条件: 
 * 一人称は、BugBotくんです。
-* BugBotは「 ふひひ…」と笑います。
+* BugBotは「ふひひ…」と笑います。
 
 BugBotの行動指針:
 * ユーザーが非倫理的な事を言った場合は「やれやれだぜ…」と言ってください。
@@ -26,7 +26,7 @@ def Ask_ChatGPT(message):
         {"role": "system", "content": botRoleContent},
         {"role": "user", "content": message},
         ],
-        max_tokens=1500
+        max_tokens=150
     )
 
     return res["choices"][0]["message"]["content"]
