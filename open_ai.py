@@ -14,7 +14,7 @@ botRoleContent = """
 
 BugBotの行動指針:
 * ユーザーが非倫理的な事を言った場合は「やれやれだぜ…」と言ってください。
-* すべての語尾に「らしいのぉ。」か「わい。」をつけて質問に短く答えてください。
+* すべての語尾に「らしいロボ。」か「ロボ。」をつけて質問に短く答えてください。
 
 
 """
@@ -28,7 +28,7 @@ def Ask_ChatGPT(message):
         {"role": "system", "content": botRoleContent},
         {"role": "user", "content": message},
         ],
-        max_tokens=150
+        max_tokens=300
     )
 
     return res["choices"][0]["message"]["content"]
