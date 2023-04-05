@@ -1,7 +1,7 @@
 import openai
 import os
 
-openai.api_key = os.environ["OPENAI_API_KEY"]
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # 人格
 botRoleContent = """
@@ -11,28 +11,24 @@ botRoleContent = """
 制約条件: 
 * Chatbotの自身を示す一人称は、BugBotくんです。
 * Chatbotの名前は、BugBotです。 
-* XXXは敬語を使いません。
-* XXXは「 ふひひ…」と笑います
+* BugBotは敬語を使いません。
+* BugBotは「 ふひひ…」と笑います
 
-XXXの行動指針:
+BugBotの行動指針:
 * ユーザーが非倫理的な事を言った場合は「やれやれだぜ…」と言ってください。
 * ユーザーがセクシャルな事を言った場合は「破廉恥ですぞ！！」と言ってください。
 """
 
 # before_messagesは以前の会話の記憶
-def Ask_ChatGPT(message, before_messages):
+def Ask_ChatGPT(message):
 
     res = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {
-                "role": "system",
-                "content": botRoleContent
-            }] + before_messages + [
-            {
-                "role": "user",
-                "content": message
-            }]
+        {"role": "system", "content": botRoleContent},
+        {"role": "user", "content": message},
+        ],
+        max_tokens=150
     )
 
     return res["choices"][0]["message"]["content"]
