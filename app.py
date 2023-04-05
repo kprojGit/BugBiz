@@ -306,7 +306,7 @@ def handle_message(event):
         return_message = messe[:messe.find('Q ')]
         AIresponse = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
-            AImessages=[
+            messages=[
                 {"role": "system", "content": "語頭には「あーはいはい、それね。」、すべての語尾に「らしいのぉ。」か「わい。」をつけて質問に短く答えてください"},
                 {"role": "user", "content": return_message},
             ],
