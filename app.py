@@ -38,7 +38,7 @@ import random
 import json
 import janken
 import openai
-openai.api_key = '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'
+openai.api_key = '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'
 
 
 
