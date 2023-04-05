@@ -37,7 +37,11 @@ import logging
 import random
 import json
 import janken
+import openai
 
+
+
+openai.api_key = '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'
 
 
 # 標準出力にログ出力することで、Herokuのログに出力する
@@ -297,6 +301,26 @@ def handle_message(event):
 
 
 
+    # ChatGPT用のスクリプト
+    elif "Q " in  messe:
+        return_message = messe[:messe.find('Q ')]
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "語頭には「あーはいはい、それね。」、すべての語尾に「らしいのぉ。」か「わい。」をつけて質問に短く答えてください"},
+                {"role": "user", "content": return_message},
+            ],
+            max_tokens=250
+        )
+        #print(f"ChatGPT: {response['choices'][0]['message']['content']}")
+        #print(response['usage'])
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(response['usage'])
+        )   
+
+
+
 
 
 
@@ -336,16 +360,17 @@ def handle_message(event):
    
     else: #"確認" または "チェック"以外のメッセージを入力した場合はオウム返し
         
-        text1='検索したい場合→「検索したい語句＋検索」\n'
-        text2='じゃんけん→「*じゃんけん*」\n'
+        text2='wikipediaで検索したい場合→「検索したい語句＋検索」\n'
+        text1='ChatGPTでの検索→「文頭にQ＋検索したい内容」\n'
+        #text2='じゃんけん→「*じゃんけん*」\n'
         text3='コロナ感染者数→「*コロナ*」\n'
-        text4='映画検索→「*映画* or *番組表*」\n'
+        #text4='映画検索→「*映画* or *番組表*」\n'
         #text5='監視カメラ写真→「*画像* or *photo*」\n'
-        text5='監視カメラ（川根）→「*監視* or *カメラ*」\n'
+        #text5='監視カメラ（川根）→「*監視* or *カメラ*」\n'
         text6='天気予報→「今日+天気」\n'
         text7='を入力してください！'
 
-        text = text1 + text2+ text3+ text4+ text5+ text6 + text7
+        text = text1 + text2+ text3+ text6 + text7
         line_bot_api.reply_message(
             event.reply_token,
             [
