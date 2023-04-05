@@ -38,7 +38,7 @@ import random
 import json
 import janken
 import openai
-openai.api_key = os.getenv("openai_api")
+openai.api_key = os.getenv["openai_api"]
 
 
 
