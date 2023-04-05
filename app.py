@@ -38,8 +38,10 @@ import random
 import json
 import janken
 import openai
-#openai.api_key = os.getenv["openai_api"]
-openai.api_key = os.environ["openai_api"]
+import open_ai
+
+#openai.api_key = os.getenv("OPENAI_API_KEY")
+#openai.api_key = os.environ["OPENAI_API_KEY"]
 
 
 
@@ -306,21 +308,7 @@ def handle_message(event):
     # ChatGPT用のスクリプト
     elif "Q" in  messe:
         return_message = messe[:messe.find('Q')]
-        AIresponse = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "語頭には「あーはいはい、それね。」、すべての語尾に「らしいのぉ。」か「わい。」をつけて質問に短く答えてください"},
-                {"role": "user", "content": return_message},
-            ],
-            max_tokens=250
-        )
-        #print(f"ChatGPT: {response['choices'][0]['message']['content']}")
-        #print(response['usage'])
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(AIresponse['usage'])
-        )   
-
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=open_ai.Ask_ChatGPT(return_message)))
 
 
 
