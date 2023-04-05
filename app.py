@@ -303,7 +303,7 @@ def handle_message(event):
 
     # ChatGPT用のスクリプト
     elif "Q" in  messe:
-        return_message = messe[:messe.find('Q ')]
+        return_message = messe[:messe.find('Q')]
         AIresponse = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
