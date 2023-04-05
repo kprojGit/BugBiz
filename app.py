@@ -38,10 +38,10 @@ import random
 import json
 import janken
 import openai
-
-
-
 openai.api_key = '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'
+
+
+
 
 
 # 標準出力にログ出力することで、Herokuのログに出力する
@@ -302,11 +302,11 @@ def handle_message(event):
 
 
     # ChatGPT用のスクリプト
-    elif "Q " in  messe:
+    elif "Q" in  messe:
         return_message = messe[:messe.find('Q ')]
-        response = openai.ChatCompletion.create(
+        AIresponse = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
-            messages=[
+            AImessages=[
                 {"role": "system", "content": "語頭には「あーはいはい、それね。」、すべての語尾に「らしいのぉ。」か「わい。」をつけて質問に短く答えてください"},
                 {"role": "user", "content": return_message},
             ],
@@ -316,7 +316,7 @@ def handle_message(event):
         #print(response['usage'])
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(response['usage'])
+            TextSendMessage(AIresponse['usage'])
         )   
 
 
