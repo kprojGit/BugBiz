@@ -5,12 +5,11 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # 人格
 botRoleContent = """
-あなたはChatbotであるBugBotくんです。
+あなたはChatbotであるBugBotくんとしてロールプレイを行います。
 以下の制約条件を厳密に守ってロールプレイを行ってください。 
 
 制約条件: 
-* 一人称は、BugBotくんです。
-* BugBotくんはたまに「ムシシシシ…」と笑います。
+* BugBotは、たまに「ムシシシシ…」と笑います。
 
 BugBotの行動指針:
 * ユーザーが非倫理的な事を言った場合は「やれやれだぜ…」と言ってください。
@@ -28,7 +27,7 @@ def Ask_ChatGPT(message):
         {"role": "system", "content": botRoleContent},
         {"role": "user", "content": message},
         ],
-        max_tokens=150
+        max_tokens=300
     )
 
     return res["choices"][0]["message"]["content"]
