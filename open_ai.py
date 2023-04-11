@@ -28,7 +28,7 @@ def Ask_ChatGPT(message):
         {"role": "system", "content": "あなたは優秀なChatbot、BugBotくんです。"},
         {"role": "user", "content": message},
         ],
-        max_tokens=300
+        max_tokens=500
     )
 
     return res["choices"][0]["message"]["content"]
