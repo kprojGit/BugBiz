@@ -26,8 +26,7 @@ def Ask_ChatGPT(message):
         model="gpt-3.5-turbo",
         messages=[
         {"role": "system", "content": botRoleContent},
-        {"role": "assistant", "content": message},
-        {"role": "user", "content": "先ほどの文章を要約して答えてください"},
+        {"role": "user", "content": message},
         ],
         max_tokens=150
     )
