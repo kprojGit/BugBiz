@@ -29,7 +29,7 @@ def Ask_ChatGPT(message):
         {"role": "assistant", "content": message},
         {"role": "user", "content": "先ほどの文章を要約して答えてください"},
         ],
-        max_tokens=300
+        max_tokens=200
     )
 
     return res["choices"][0]["message"]["content"]
