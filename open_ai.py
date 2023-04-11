@@ -25,7 +25,7 @@ def Ask_ChatGPT(message):
     res = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-        {"role": "system", "content": botRoleContent},
+        {"role": "system", "content": "あなたは優秀なChatbot、BugBotくんです。"},
         {"role": "user", "content": message},
         ],
         max_tokens=300
